@@ -1,3 +1,9 @@
+package controller;
+
+import model.Account;
+import model.Transaction;
+import service.AccountService;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,7 +33,8 @@ public class AccountController {
 
                 // case1 : Truy vấn số dư tài khoản
                 case 1:
-                    System.out.println("Balance: "+service.getBalance(currentAccount));
+                    System.out.println("=== Check banlance ===");
+                    System.out.println("==> Balance: "+service.getBalance(currentAccount));
                     break;
 
                 // Chuyển tiền
@@ -39,6 +46,10 @@ public class AccountController {
                 case 3:
                     showHistoryTransition(currentAccount);
                     break;
+
+                // Exit
+                case 0:
+                    System.exit(0);
 
                 default:
                     System.out.println("Have no this choice");
@@ -59,7 +70,7 @@ public class AccountController {
             if(service.checkValid(name,pass)){
                 username = name;
                 password = pass;
-                System.out.println("Login successful !!!");
+                System.out.println("==> Login successful !!!");
                 break;
             }
             System.out.println("==> Username , Password incorrect , Please try again: ");
@@ -118,6 +129,7 @@ public class AccountController {
 
     // transaction
     public static void transaction( Account currentAccount){
+        System.out.println("=== Transaction ===");
         Account acc = inputSTK(currentAccount);
 
         while(true){
@@ -127,28 +139,28 @@ public class AccountController {
                 amount = Double.parseDouble(sc.nextLine());
             }
             catch (Exception e){
-                System.out.println("Amount is not valid, try again!!!");
+                System.out.println("=> Amount is not valid, try again!!!");
                 continue;
             }
 
             if(currentAccount.getBalance() < 100000){
-                System.out.println("Balance is not enough to do transaction !!!");
+                System.out.println("=> Balance is not enough to do transaction !!!");
                 break;
             }
 
             if(amount<50000){
-                System.out.println("Amount must be > 50000, Try agian!!!");
+                System.out.println("=> Amount must be > 50000, Try agian!!!");
                 continue;
             }
             if(currentAccount.getBalance()-amount < 50000){
-                System.out.printf("Your balance is: %s, amount too much , Please try agian!!!\n",service.getBalance(currentAccount));
+                System.out.printf("=> Your balance is: %s, amount too much , Please try agian!!!\n",service.getBalance(currentAccount));
                 continue;
             }
 
             System.out.println("Enter message: ");
             String message = sc.nextLine();
             currentAccount.withdraw(amount);
-            System.out.println("Transaction successful");
+            System.out.println("==> Transaction successful");
             Transaction trans = new Transaction(message,acc.getAccountNumber(),amount);
             List<Transaction> t = currentAccount.getTransaction();
             t.add(trans);
@@ -158,7 +170,7 @@ public class AccountController {
     }
 
     public void showHistoryTransition(Account acc){
-        System.out.println("===History transaction===");
+        System.out.println("=== History transaction ===");
         acc.getTransaction().forEach(t-> System.out.println(t));
 
     }
