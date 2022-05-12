@@ -14,7 +14,7 @@ public class AccountService {
 
     private List<Account> lst = new ArrayList<>();
     {
-        lst.add(new Account("NguyenTuan","123","01234567"));
+        lst.add(new Account("NguyenTuan","123","88888888"));
         lst.add(new Account("John","123","99999999"));
     }
     public List<Account> getLst() {
