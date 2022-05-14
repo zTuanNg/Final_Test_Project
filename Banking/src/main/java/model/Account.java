@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "--Account{" +
+        return "--model.Account{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", accountNumber='" + accountNumber + '\'' +

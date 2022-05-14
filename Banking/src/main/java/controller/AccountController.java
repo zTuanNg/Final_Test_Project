@@ -1,3 +1,9 @@
+package controller;
+
+import model.Account;
+import model.Transaction;
+import service.AccountService;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,7 +34,12 @@ public class AccountController {
 
                 // case1 : Truy vấn số dư tài khoản
                 case 1:
+<<<<<<< HEAD:Banking/src/main/java/AccountController.java
                     System.out.println("=>Balance: " + service.getBalance(currentAccount));
+=======
+                    System.out.println("=== Check banlance ===");
+                    System.out.println("==> Balance: "+service.getBalance(currentAccount));
+>>>>>>> bab90c3bbf8f30bc47c029109a3085e4ea44de7a:Banking/src/main/java/controller/AccountController.java
                     break;
 
                 // Chuyển tiền
@@ -40,6 +51,10 @@ public class AccountController {
                 case 3:
                     showHistoryTransition(currentAccount);
                     break;
+
+                // Exit
+                case 0:
+                    System.exit(0);
 
                 default:
                     System.out.println("Have no this choice");
@@ -60,7 +75,7 @@ public class AccountController {
             if (service.checkValid(name, pass)) {
                 username = name;
                 password = pass;
-                System.out.println("Login successful !!!");
+                System.out.println("==> Login successful !!!");
                 break;
             }
             System.out.println("==> Username , Password incorrect , Please try again: ");
@@ -119,7 +134,12 @@ public class AccountController {
     }
 
     // transaction
+<<<<<<< HEAD:Banking/src/main/java/AccountController.java
     public static void transaction(Account currentAccount) {
+=======
+    public static void transaction( Account currentAccount){
+        System.out.println("=== Transaction ===");
+>>>>>>> bab90c3bbf8f30bc47c029109a3085e4ea44de7a:Banking/src/main/java/controller/AccountController.java
         Account acc = inputSTK(currentAccount);
 
         while (true) {
@@ -127,6 +147,7 @@ public class AccountController {
             System.out.println("Enter amount: ");
             try {
                 amount = Double.parseDouble(sc.nextLine());
+<<<<<<< HEAD:Banking/src/main/java/AccountController.java
             } catch (Exception e) {
                 System.out.println("Amount is not valid, try again!!!");
                 continue;
@@ -143,14 +164,38 @@ public class AccountController {
             }
             if (currentAccount.getBalance() - amount < 50000) {
                 System.out.printf("Your balance is: %s, amount too much , Please try agian!!!\n", service.getBalance(currentAccount));
+=======
+            }
+            catch (Exception e){
+                System.out.println("=> Amount is not valid, try again!!!");
+                continue;
+            }
+
+            if(currentAccount.getBalance() < 100000){
+                System.out.println("=> Balance is not enough to do transaction !!!");
+                break;
+            }
+
+            if(amount<50000){
+                System.out.println("=> Amount must be > 50000, Try agian!!!");
+                continue;
+            }
+            if(currentAccount.getBalance()-amount < 50000){
+                System.out.printf("=> Your balance is: %s, amount too much , Please try agian!!!\n",service.getBalance(currentAccount));
+>>>>>>> bab90c3bbf8f30bc47c029109a3085e4ea44de7a:Banking/src/main/java/controller/AccountController.java
                 continue;
             }
 
             System.out.println("Enter message: ");
             String message = sc.nextLine();
             currentAccount.withdraw(amount);
+<<<<<<< HEAD:Banking/src/main/java/AccountController.java
             System.out.println("Transaction successful");
             Transaction trans = new Transaction(message, acc.getAccountNumber(), amount);
+=======
+            System.out.println("==> Transaction successful");
+            Transaction trans = new Transaction(message,acc.getAccountNumber(),amount);
+>>>>>>> bab90c3bbf8f30bc47c029109a3085e4ea44de7a:Banking/src/main/java/controller/AccountController.java
             List<Transaction> t = currentAccount.getTransaction();
             t.add(trans);
             break;
@@ -158,12 +203,18 @@ public class AccountController {
         }
     }
 
+<<<<<<< HEAD:Banking/src/main/java/AccountController.java
     public static void showHistoryTransition(Account acc) {
         System.out.println("===History transaction===");
         if (acc.getTransaction().size() != 0)
             acc.getTransaction().forEach(t -> System.out.println(t));
         else
             System.out.println("=>History transaction is empty!");
+=======
+    public void showHistoryTransition(Account acc){
+        System.out.println("=== History transaction ===");
+        acc.getTransaction().forEach(t-> System.out.println(t));
+>>>>>>> bab90c3bbf8f30bc47c029109a3085e4ea44de7a:Banking/src/main/java/controller/AccountController.java
 
     }
 }
