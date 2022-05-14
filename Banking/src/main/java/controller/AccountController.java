@@ -154,7 +154,7 @@ public class AccountController {
             }
 
             if (amount < 50000) {
-                System.out.println("Amount must be > 50000, Try agian!!!");
+                System.out.println("Amount must be >= 50000, Try agian!!!");
                 continue;
             }
             if (currentAccount.getBalance() - amount < 50000) {
